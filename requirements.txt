@@ -1,0 +1,7 @@
+pandas
+numpy
+requests
+pdfplumber
+scikit-learn
+joblib
+matplotlib

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pipeline Terminal — Salary Prediction</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="wrap" id="wrap">
+    <canvas class="net-canvas" id="netCanvas"></canvas>
+
+    <div class="header">
+      <div class="eyebrow">pipeline etl + ml</div>
+      <div class="title">Predição salarial em IA</div>
+      <div class="subtitle">Impacto da inteligência artificial no mercado de trabalho</div>
+    </div>
+
+    <div class="btn-ring" id="mainBtn" role="button" aria-label="Iniciar pipeline" tabindex="0">
+      <svg class="ring-svg" viewBox="0 0 120 120">
+        <circle class="ring-track" cx="60" cy="60" r="50"/>
+        <circle class="ring-progress" id="ringProgress" cx="60" cy="60" r="50"/>
+        <circle class="ring-pulse" id="ringPulse" cx="60" cy="60" r="50"/>
+      </svg>
+      <div class="btn-inner" id="btnInner">
+        <span class="btn-icon" id="btnIcon">&#9654;</span>
+        <span class="btn-label" id="btnLabel">iniciar</span>
+      </div>
+    </div>
+
+    <div class="steps" id="stepsGrid">
+      <div class="step" id="s0">
+        <div class="step-head"><div class="step-dot"></div><span class="step-name">Extração</span></div>
+        <div class="step-detail">Kaggle CSV · Remotive API · WEF PDF</div>
+      </div>
+      <div class="step" id="s1">
+        <div class="step-head"><div class="step-dot"></div><span class="step-name">Limpeza</span></div>
+        <div class="step-detail">Nulos · Tipos · Duplicatas</div>
+      </div>
+      <div class="step" id="s2">
+        <div class="step-head"><div class="step-dot"></div><span class="step-name">Transformação</span></div>
+        <div class="step-detail">Padronização · Features · Integração</div>
+      </div>
+      <div class="step" id="s3">
+        <div class="step-head"><div class="step-dot"></div><span class="step-name">Machine Learning</span></div>
+        <div class="step-detail">Random Forest · MAE · R²</div>
+      </div>
+    </div>
+
+    <div class="log">
+      <div class="log-inner" id="logLines">
+        <div class="log-line">sistema pronto. aguardando inicialização<span class="cursor">_</span></div>
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status-txt" id="statusTxt">status: <span>aguardando</span></div>
+      <div class="pct" id="pctTxt">0%</div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
