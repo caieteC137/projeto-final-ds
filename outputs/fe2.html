@@ -1,0 +1,777 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Impacto da Inteligencia Artificial no Mercado de Trabalho</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17202a;
+      --muted: #637083;
+      --panel: #ffffff;
+      --line: #dfe6ee;
+      --page: #f5f7fa;
+      --low: #24745f;
+      --medium: #c07a19;
+      --high: #b83f44;
+      --accent: #285ea8;
+      --accent-2: #4a8b7d;
+      --shadow: 0 14px 32px rgba(31, 45, 61, .10);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      color: var(--ink);
+      background: var(--page);
+      line-height: 1.45;
+    }
+
+    header {
+      background:
+        linear-gradient(rgba(13, 24, 38, .76), rgba(13, 24, 38, .72)),
+        url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1800&q=80");
+      background-size: cover;
+      background-position: center;
+      color: #fff;
+      min-height: 430px;
+      display: flex;
+      align-items: end;
+      border-bottom: 1px solid rgba(255,255,255,.18);
+    }
+
+    .hero {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 56px 0 40px;
+    }
+
+    .eyebrow {
+      font-size: .78rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-weight: 700;
+      color: #b8d5f0;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 900px;
+      font-size: clamp(2rem, 5vw, 4.4rem);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 760px;
+      margin: 18px 0 0;
+      color: #e9f0f7;
+      font-size: 1.08rem;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,.94);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      overflow-x: auto;
+      padding: 10px 0;
+    }
+
+    .nav-inner a {
+      color: var(--ink);
+      text-decoration: none;
+      font-size: .92rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: 6px;
+      white-space: nowrap;
+    }
+
+    .nav-inner a:hover,
+    .nav-inner a:focus {
+      background: #eaf1f8;
+      outline: none;
+    }
+
+    main {
+      width: min(1180px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 30px 0 60px;
+    }
+
+    section { margin: 42px 0; }
+
+    .section-head {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 18px;
+      max-width: 900px;
+    }
+
+    h2 {
+      font-size: clamp(1.35rem, 2.5vw, 2rem);
+      margin: 0;
+      letter-spacing: 0;
+    }
+
+    .section-head p,
+    .note {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .card,
+    .insight,
+    .table-wrap,
+    .filter-bar {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    .card {
+      padding: 18px;
+      min-height: 142px;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: .83rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .metric {
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 10px 0 6px;
+    }
+
+    .card p,
+    .insight p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: minmax(0, 1.1fr) minmax(310px, .9fr);
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .chart-panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: var(--shadow);
+      min-width: 0;
+    }
+
+    .chart-title {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .chart-title h3 {
+      margin: 0;
+      font-size: 1.05rem;
+    }
+
+    .chart-title span {
+      color: var(--muted);
+      font-size: .86rem;
+      white-space: nowrap;
+    }
+
+    .legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 16px;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .bar-row {
+      display: grid;
+      grid-template-columns: minmax(128px, 1fr) minmax(190px, 2fr) 72px;
+      gap: 12px;
+      align-items: center;
+      margin: 12px 0;
+      font-size: .93rem;
+    }
+
+    .bar-label {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      font-weight: 700;
+    }
+
+    .bar-track {
+      height: 14px;
+      display: flex;
+      border-radius: 999px;
+      overflow: hidden;
+      background: #e9eef4;
+    }
+
+    .seg-low { background: var(--low); }
+    .seg-medium { background: var(--medium); }
+    .seg-high { background: var(--high); }
+
+    .value {
+      color: var(--muted);
+      font-variant-numeric: tabular-nums;
+      text-align: right;
+    }
+
+    .salary-row {
+      display: grid;
+      grid-template-columns: 92px 1fr 96px;
+      gap: 12px;
+      align-items: center;
+      margin: 15px 0;
+    }
+
+    .salary-track {
+      height: 18px;
+      border-radius: 999px;
+      background: #e9eef4;
+      overflow: hidden;
+    }
+
+    .salary-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--accent);
+    }
+
+    .insights {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .insight {
+      padding: 18px;
+    }
+
+    .insight strong {
+      display: block;
+      font-size: 1.05rem;
+      margin-bottom: 8px;
+    }
+
+    .filter-bar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) repeat(2, minmax(150px, 190px));
+      gap: 12px;
+      padding: 14px;
+      margin-bottom: 14px;
+      box-shadow: none;
+    }
+
+    input,
+    select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 10px 11px;
+      font: inherit;
+      background: #fff;
+      color: var(--ink);
+    }
+
+    .table-wrap {
+      overflow: auto;
+      box-shadow: var(--shadow);
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 820px;
+      background: #fff;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #eef3f8;
+      font-size: .82rem;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+      color: #38485c;
+    }
+
+    tbody tr:hover { background: #f8fbfd; }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 64px;
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-weight: 800;
+      font-size: .78rem;
+      color: #fff;
+    }
+
+    .pill.Low { background: var(--low); }
+    .pill.Medium { background: var(--medium); }
+    .pill.High { background: var(--high); }
+
+    .method-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    footer {
+      color: var(--muted);
+      border-top: 1px solid var(--line);
+      padding-top: 20px;
+      margin-top: 40px;
+      font-size: .92rem;
+    }
+
+    @media (max-width: 920px) {
+      .kpis,
+      .insights,
+      .method-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+      }
+
+      .filter-bar {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      header { min-height: 390px; }
+      .kpis,
+      .insights,
+      .method-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .bar-row {
+        grid-template-columns: 1fr;
+        gap: 6px;
+        margin: 18px 0;
+      }
+
+      .value { text-align: left; }
+      .salary-row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="hero">
+      <div class="eyebrow">Projeto final de ciencia de dados</div>
+      <h1>Impacto da Inteligencia Artificial no Mercado de Trabalho</h1>
+      <p>Uma interface exploratoria sobre salarios, habilidades, cargos e risco de automacao em 500 registros profissionais. A leitura central e simples: a IA nao atinge apenas cargos de baixa remuneracao; ela reorganiza tarefas, habilidades e perfis em diferentes areas.</p>
+    </div>
+  </header>
+
+  <nav aria-label="Navegacao principal">
+    <div class="nav-inner">
+      <a href="#visao-geral">Visao geral</a>
+      <a href="#risco">Risco de automacao</a>
+      <a href="#cargos">Cargos</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#dados">Tabela</a>
+      <a href="#metodos">Metodos</a>
+    </div>
+  </nav>
+
+  <main>
+    <section id="visao-geral">
+      <div class="section-head">
+        <h2>Leitura inicial da base</h2>
+        <p>O dataset analisado tem origem Kaggle e contem variaveis de cargo, salario anual em dolar, cidade/pais, porte da empresa, habilidade principal e classificacao de risco de automacao.</p>
+      </div>
+
+      <div class="kpis">
+        <article class="card">
+          <div class="label">Registros</div>
+          <div class="metric">500</div>
+          <p>Linhas validas no arquivo <strong>dataset_final.json</strong>.</p>
+        </article>
+        <article class="card">
+          <div class="label">Salario medio</div>
+          <div class="metric">US$ 91.222</div>
+          <p>Media anual dos salarios registrados na base.</p>
+        </article>
+        <article class="card">
+          <div class="label">Maior grupo</div>
+          <div class="metric">34,6%</div>
+          <p>Risco medio de automacao, com 173 registros.</p>
+        </article>
+        <article class="card">
+          <div class="label">Habilidade lider</div>
+          <div class="metric">60</div>
+          <p>Ocorrencias de Project Management e Python, empatadas no topo.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="risco">
+      <div class="section-head">
+        <h2>Risco de automacao e salario</h2>
+        <p>A distribuicao entre baixo, medio e alto risco e relativamente equilibrada. O dado mais importante e que o grupo de alto risco nao tem o menor salario medio, entao a analise deve evitar a conclusao simplista de que apenas funcoes mal pagas sao afetadas.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="chart-panel">
+          <div class="chart-title">
+            <h3>Distribuicao por risco</h3>
+            <span>500 registros</span>
+          </div>
+          <div id="riskBars"></div>
+          <div class="legend">
+            <span><i class="dot" style="background: var(--low)"></i>Baixo</span>
+            <span><i class="dot" style="background: var(--medium)"></i>Medio</span>
+            <span><i class="dot" style="background: var(--high)"></i>Alto</span>
+          </div>
+        </div>
+
+        <div class="chart-panel">
+          <div class="chart-title">
+            <h3>Salario medio por risco</h3>
+            <span>USD/ano</span>
+          </div>
+          <div id="salaryBars"></div>
+          <p class="note">Na base, o risco alto tem media de US$ 93.908, acima dos grupos medio e baixo. Isso sugere transformacao de tarefas, nao apenas substituicao de ocupacoes de menor renda.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="cargos">
+      <div class="section-head">
+        <h2>Cargos mais presentes</h2>
+        <p>Os cargos aparecem com diferentes combinacoes de risco. Cybersecurity Analyst, Product Manager, Sales Manager e AI Researcher passam de 39% de participacao em alto risco, enquanto Operations Manager tem a menor proporcao de alto risco entre os cargos listados.</p>
+      </div>
+
+      <div class="chart-panel">
+        <div class="chart-title">
+          <h3>Composicao de risco por cargo</h3>
+          <span>Top 10 cargos</span>
+        </div>
+        <div id="jobBars"></div>
+      </div>
+    </section>
+
+    <section id="habilidades">
+      <div class="section-head">
+        <h2>Habilidades e exposicao a IA</h2>
+        <p>As habilidades mais frequentes combinam competencias tecnicas e humanas. Sales tem a maior proporcao de alto risco na lista, enquanto Python aparece muito frequente, mas com menor participacao relativa de alto risco.</p>
+      </div>
+
+      <div class="grid-2">
+        <div class="chart-panel">
+          <div class="chart-title">
+            <h3>Habilidades mais citadas</h3>
+            <span>Ocorrencias</span>
+          </div>
+          <div id="skillBars"></div>
+        </div>
+        <div class="insights">
+          <article class="insight">
+            <strong>Competencias tecnicas continuam centrais</strong>
+            <p>Python, Cybersecurity, Machine Learning e Data Analysis estao entre as habilidades mais frequentes.</p>
+          </article>
+          <article class="insight">
+            <strong>Gestao tambem e impactada</strong>
+            <p>Project Management lidera a lista, mostrando que a IA tambem toca coordenacao, planejamento e decisao.</p>
+          </article>
+          <article class="insight">
+            <strong>Limite da analise</strong>
+            <p>Experiencia e trabalho remoto estao sem valores na base, entao estes fatores nao foram usados nas conclusoes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="dados">
+      <div class="section-head">
+        <h2>Tabela exploratoria</h2>
+        <p>Use os filtros para comparar cargos e riscos. A tabela resume os agrupamentos calculados a partir dos 500 registros do dataset.</p>
+      </div>
+
+      <div class="filter-bar" aria-label="Filtros da tabela">
+        <input id="search" type="search" placeholder="Buscar cargo ou habilidade">
+        <select id="riskFilter" aria-label="Filtrar por risco predominante">
+          <option value="all">Todos os riscos</option>
+          <option value="Low">Baixo predominante</option>
+          <option value="Medium">Medio predominante</option>
+          <option value="High">Alto predominante</option>
+        </select>
+        <select id="sortBy" aria-label="Ordenar tabela">
+          <option value="count">Mais registros</option>
+          <option value="highPct">Maior % alto risco</option>
+          <option value="avgSalary">Maior salario medio</option>
+        </select>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Cargo</th>
+              <th>Registros</th>
+              <th>Risco predominante</th>
+              <th>Baixo</th>
+              <th>Medio</th>
+              <th>Alto</th>
+              <th>% alto risco</th>
+              <th>Salario medio</th>
+            </tr>
+          </thead>
+          <tbody id="summaryTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="metodos">
+      <div class="section-head">
+        <h2>Metodos de carga e entrega</h2>
+        <p>Para atender ao requisito de pelo menos tres metodos, esta pagina pode ser apresentada junto com o dashboard em Power BI e o arquivo/base JSON usado como origem dos dados. Caso o professor exija um terceiro output visual, o mesmo resumo pode ser exportado para PDF ou Excel.</p>
+      </div>
+
+      <div class="method-grid">
+        <article class="card">
+          <div class="label">Metodo 1</div>
+          <div class="metric">HTML</div>
+          <p>Interface web interativa para apresentacao e exploracao dos resultados.</p>
+        </article>
+        <article class="card">
+          <div class="label">Metodo 2</div>
+          <div class="metric">Power BI</div>
+          <p>Dashboard complementar com visualizacoes e filtros, produzido separadamente.</p>
+        </article>
+        <article class="card">
+          <div class="label">Metodo 3</div>
+          <div class="metric">JSON</div>
+          <p>Arquivo de dados processado usado como base de carga: dataset_final.json.</p>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      Base analisada: 500 registros de <strong>dataset_final.json</strong>. Campos sem preenchimento na base: Remote_Ratio, remote_score e seniority_num; por isso, nao foram feitas conclusoes sobre home office ou senioridade.
+    </footer>
+  </main>
+
+  <script>
+    const riskSummary = [
+      { risk: "Low", label: "Baixo", count: 158, pct: 31.6, avgSalary: 92112 },
+      { risk: "Medium", label: "Medio", count: 173, pct: 34.6, avgSalary: 87786 },
+      { risk: "High", label: "Alto", count: 169, pct: 33.8, avgSalary: 93908 }
+    ];
+
+    const jobs = [
+      { job: "Data Scientist", count: 62, low: 25, medium: 20, high: 17, avgSalary: 91481, highPct: 27.4, skills: "Python, Machine Learning, Data Analysis" },
+      { job: "Hr Manager", count: 57, low: 16, medium: 26, high: 15, avgSalary: 89252, highPct: 26.3, skills: "Communication, Project Management" },
+      { job: "Cybersecurity Analyst", count: 55, low: 21, medium: 11, high: 23, avgSalary: 89429, highPct: 41.8, skills: "Cybersecurity, Python, UX/UI Design" },
+      { job: "Ux Designer", count: 54, low: 10, medium: 28, high: 16, avgSalary: 90157, highPct: 29.6, skills: "UX/UI Design, Communication" },
+      { job: "Ai Researcher", count: 51, low: 15, medium: 16, high: 20, avgSalary: 95583, highPct: 39.2, skills: "Machine Learning, Python" },
+      { job: "Sales Manager", count: 49, low: 18, medium: 11, high: 20, avgSalary: 92927, highPct: 40.8, skills: "Sales, Communication" },
+      { job: "Marketing Specialist", count: 48, low: 10, medium: 21, high: 17, avgSalary: 90961, highPct: 35.4, skills: "Marketing, Data Analysis" },
+      { job: "Operations Manager", count: 44, low: 18, medium: 16, high: 10, avgSalary: 96937, highPct: 22.7, skills: "Project Management, Communication" },
+      { job: "Software Engineer", count: 41, low: 13, medium: 13, high: 15, avgSalary: 84491, highPct: 36.6, skills: "JavaScript, Python" },
+      { job: "Product Manager", count: 39, low: 12, medium: 11, high: 16, avgSalary: 90803, highPct: 41.0, skills: "Project Management, Data Analysis" }
+    ];
+
+    const skills = [
+      { skill: "Project Management", count: 60, highPct: 38.3 },
+      { skill: "Python", count: 60, highPct: 25.0 },
+      { skill: "Cybersecurity", count: 58, highPct: 31.0 },
+      { skill: "Machine Learning", count: 52, highPct: 36.5 },
+      { skill: "UX/UI Design", count: 49, highPct: 28.6 },
+      { skill: "Sales", count: 49, highPct: 49.0 },
+      { skill: "Data Analysis", count: 49, highPct: 36.7 },
+      { skill: "Marketing", count: 45, highPct: 28.9 },
+      { skill: "JavaScript", count: 44, highPct: 36.4 },
+      { skill: "Communication", count: 34, highPct: 26.5 }
+    ];
+
+    const money = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0
+    });
+
+    function riskClass(risk) {
+      return risk === "High" ? "High" : risk === "Medium" ? "Medium" : "Low";
+    }
+
+    function predominant(item) {
+      const values = [
+        ["Low", item.low],
+        ["Medium", item.medium],
+        ["High", item.high]
+      ];
+      return values.sort((a, b) => b[1] - a[1])[0][0];
+    }
+
+    function stackedBar(item) {
+      const total = item.low + item.medium + item.high;
+      const low = (item.low / total) * 100;
+      const medium = (item.medium / total) * 100;
+      const high = (item.high / total) * 100;
+      return `
+        <div class="bar-track" aria-label="Baixo ${item.low}, medio ${item.medium}, alto ${item.high}">
+          <span class="seg-low" style="width:${low}%"></span>
+          <span class="seg-medium" style="width:${medium}%"></span>
+          <span class="seg-high" style="width:${high}%"></span>
+        </div>
+      `;
+    }
+
+    function renderRiskBars() {
+      const el = document.querySelector("#riskBars");
+      el.innerHTML = riskSummary.map(item => `
+        <div class="bar-row">
+          <div class="bar-label">${item.label}</div>
+          <div class="bar-track">
+            <span class="seg-${item.risk.toLowerCase()}" style="width:${item.pct}%"></span>
+          </div>
+          <div class="value">${item.count} (${item.pct.toFixed(1)}%)</div>
+        </div>
+      `).join("");
+    }
+
+    function renderSalaryBars() {
+      const el = document.querySelector("#salaryBars");
+      const max = Math.max(...riskSummary.map(item => item.avgSalary));
+      el.innerHTML = riskSummary.map(item => `
+        <div class="salary-row">
+          <strong>${item.label}</strong>
+          <div class="salary-track">
+            <div class="salary-fill" style="width:${(item.avgSalary / max) * 100}%"></div>
+          </div>
+          <div class="value">${money.format(item.avgSalary)}</div>
+        </div>
+      `).join("");
+    }
+
+    function renderJobBars() {
+      const el = document.querySelector("#jobBars");
+      el.innerHTML = jobs.map(item => `
+        <div class="bar-row">
+          <div class="bar-label" title="${item.job}">${item.job}</div>
+          ${stackedBar(item)}
+          <div class="value">${item.highPct.toFixed(1)}% alto</div>
+        </div>
+      `).join("");
+    }
+
+    function renderSkillBars() {
+      const el = document.querySelector("#skillBars");
+      const max = Math.max(...skills.map(item => item.count));
+      el.innerHTML = skills.map(item => `
+        <div class="bar-row">
+          <div class="bar-label" title="${item.skill}">${item.skill}</div>
+          <div class="bar-track">
+            <span class="seg-low" style="width:${(item.count / max) * 100}%; background: var(--accent-2)"></span>
+          </div>
+          <div class="value">${item.count} | ${item.highPct.toFixed(1)}% alto</div>
+        </div>
+      `).join("");
+    }
+
+    function renderTable() {
+      const query = document.querySelector("#search").value.trim().toLowerCase();
+      const risk = document.querySelector("#riskFilter").value;
+      const sortBy = document.querySelector("#sortBy").value;
+      const tbody = document.querySelector("#summaryTable");
+
+      const rows = jobs
+        .map(item => ({ ...item, pred: predominant(item) }))
+        .filter(item => risk === "all" || item.pred === risk)
+        .filter(item => !query || item.job.toLowerCase().includes(query) || item.skills.toLowerCase().includes(query))
+        .sort((a, b) => b[sortBy] - a[sortBy]);
+
+      tbody.innerHTML = rows.map(item => `
+        <tr>
+          <td><strong>${item.job}</strong><br><span class="note">${item.skills}</span></td>
+          <td>${item.count}</td>
+          <td><span class="pill ${riskClass(item.pred)}">${item.pred === "Low" ? "Baixo" : item.pred === "Medium" ? "Medio" : "Alto"}</span></td>
+          <td>${item.low}</td>
+          <td>${item.medium}</td>
+          <td>${item.high}</td>
+          <td>${item.highPct.toFixed(1)}%</td>
+          <td>${money.format(item.avgSalary)}</td>
+        </tr>
+      `).join("");
+    }
+
+    document.querySelector("#search").addEventListener("input", renderTable);
+    document.querySelector("#riskFilter").addEventListener("change", renderTable);
+    document.querySelector("#sortBy").addEventListener("change", renderTable);
+
+    renderRiskBars();
+    renderSalaryBars();
+    renderJobBars();
+    renderSkillBars();
+    renderTable();
+  </script>
+</body>
+</html>
